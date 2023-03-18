@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "120359481640",
+    "project_id": "warehouse-flutter-app",
+    "storage_bucket": "warehouse-flutter-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120359481640:android:ea44bb0df6ac05c266e01d",
+        "android_client_info": {
+          "package_name": "com.example.warehouse_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120359481640-hd9n263i64j69v2flr5u773c6ph9scgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnYZHN00YXd2daCzXi1gAv1jAnNXfiI2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120359481640-hd9n263i64j69v2flr5u773c6ph9scgc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
