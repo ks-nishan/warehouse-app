@@ -116,11 +116,11 @@ class EmployeeList extends StatelessWidget {
                           color: Colors.black.withOpacity(0.75),
                         ),
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => UpdateEmployee(
-                          //             employee: employees[index])));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UpdateEmployee(
+                                      employee: employees[index])));
                         },
                       ),
                       InkWell(
