@@ -9,7 +9,7 @@ import 'package:warehouse_app/screens/update_employee.dart';
 
 class EmployeeList extends StatelessWidget {
   final CollectionReference _referance =
-      FirebaseFirestore.instance.collection('employees');
+      FirebaseFirestore.instance.collection('demo');
 
   List<Employee> employees = [
     // Employee(
@@ -62,6 +62,8 @@ class EmployeeList extends StatelessWidget {
                     name: e['name'],
                     email: e['email'],
                     phone: e['phone'],
+                    gender: e['gender'],
+                    address: e['address'],
                     position: e['position'],
                     salary: e['salary']))
                 .toList();

@@ -32,8 +32,8 @@ class UpdateEmployee extends StatelessWidget {
     nameController.text = employee.name;
     emailController.text = employee.email;
     phoneController.text = '${employee.phone}';
-    // genderController.text = employee;
-    // addressController.text = employee.;
+    genderController.text = employee.gender;
+    addressController.text = employee.address;
     positionController.text = employee.position;
     salaryController.text = '${employee.salary}';
 
@@ -75,11 +75,13 @@ class UpdateEmployee extends StatelessWidget {
                           name: nameController.text,
                           email: emailController.text,
                           phone: int.parse(phoneController.text),
+                          gender: genderController.text,
+                          address: addressController.text,
                           position: positionController.text,
                           salary: int.parse(salaryController.text));
 
                       final collectionReferance =
-                          FirebaseFirestore.instance.collection('employees');
+                          FirebaseFirestore.instance.collection('demo');
                       collectionReferance
                           .doc(updatedEmployee.id)
                           .update(updatedEmployee.toJson())
