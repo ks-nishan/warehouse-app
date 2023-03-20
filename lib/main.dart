@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:warehouse_app/screens/app_starter.dart';
 import 'package:warehouse_app/screens/employee_list.dart';
+import 'package:warehouse_app/screens/login.dart';
 import 'package:warehouse_app/screens/n_splash.dart';
 
 void main() async {
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Employee Management',
       theme: ThemeData(primarySwatch: Colors.indigo),
-      home: NSplashScreen(),
+      home: AppStarter(),
     );
   }
 }

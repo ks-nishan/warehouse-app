@@ -40,12 +40,14 @@ class EmployeeList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Student Management"),
+        title: const Text("Employee Management"),
         centerTitle: true,
+        backgroundColor: Colors.yellow[700],
       ),
       body: FutureBuilder<QuerySnapshot>(
         future: _referance.get(),
         builder: (context, snapshot) {
+          Colors.yellow[200];
           //check for error
           if (snapshot.hasError) {
             return const Center(
@@ -100,7 +102,7 @@ class EmployeeList extends StatelessWidget {
               color: employees[index].salary < 35000
                   ? Colors.red.shade200
                   : employees[index].salary < 65000
-                      ? Colors.yellow.shade200
+                      ? Colors.blue.shade200
                       : Colors.green.shade200,
               child: ListTile(
                 title: Text(employees[index].name),
