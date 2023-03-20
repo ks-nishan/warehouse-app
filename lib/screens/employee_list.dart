@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:warehouse_app/models/employee.dart';
 import 'package:flutter/material.dart';
 import 'package:warehouse_app/screens/add_employee.dart';
+import 'package:warehouse_app/screens/deleteSplash.dart';
 import 'package:warehouse_app/screens/update_employee.dart';
 //branch check
 
@@ -105,9 +106,10 @@ class EmployeeList extends StatelessWidget {
                 title: Text(employees[index].name),
                 subtitle: Text("Mobile No : ${employees[index].phone}"),
                 leading: CircleAvatar(
-                  radius: 25,
-                  child: Text('${employees[index].email}'),
-                ),
+                    radius: 20,
+                    backgroundColor: Colors.grey,
+                    // child: Text('${employees[index].email}'),
+                    child: Image.asset("assets/icons/manager.png")),
                 trailing: SizedBox(
                   width: 60,
                   child: Row(
@@ -137,7 +139,7 @@ class EmployeeList extends StatelessWidget {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EmployeeList()));
+                                  builder: (context) => DeleteSplash()));
                           //popup message
                         },
                       ),
