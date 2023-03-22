@@ -2,6 +2,7 @@ import 'package:warehouse_app/screens/listpage.dart';
 import 'package:flutter/material.dart';
 import 'package:warehouse_app/services/auth.dart';
 import '../services/firebase_crud.dart';
+import 'authenticate/login.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -25,23 +26,23 @@ class _AddPage extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
-    final SignOut = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Theme.of(context).primaryColor,
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () async {
-          await _auth.signOut();
-        },
-        child: Text(
-          "Log out",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
+    // final SignOut = Material(
+    //   elevation: 5.0,
+    //   borderRadius: BorderRadius.circular(30.0),
+    //   color: Theme.of(context).primaryColor,
+    //   child: MaterialButton(
+    //     minWidth: MediaQuery.of(context).size.width,
+    //     padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    //     onPressed: () async {
+    //       await _auth.signOut();
+    //     },
+    //     child: Text(
+    //       "Log out",
+    //       style: TextStyle(color: Theme.of(context).primaryColorLight),
+    //       textAlign: TextAlign.center,
+    //     ),
+    //   ),
+    // );
 
     final nameField = TextFormField(
         controller: name,
@@ -178,6 +179,24 @@ class _AddPage extends State<AddPage> {
       appBar: AppBar(
         title: const Text('Add Supplier'),
         backgroundColor: Theme.of(context).primaryColor,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil<dynamic>(
+                context,
+                MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) => Login(),
+                ),
+                (route) =>
+                    false, //if you want to disable back feature set to false
+              );
+            },
+          )
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -190,8 +209,8 @@ class _AddPage extends State<AddPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SignOut,
-                  const SizedBox(height: 15.0),
+                  // SignOut,
+                  // const SizedBox(height: 15.0),
                   nameField,
                   const SizedBox(height: 35.0),
                   emailField,
@@ -203,7 +222,7 @@ class _AddPage extends State<AddPage> {
                   productField,
                   const SizedBox(height: 35.0),
                   viewListbutton,
-                  const SizedBox(height: 45.0),
+                  const SizedBox(height: 35.0),
                   SaveButon,
                   const SizedBox(height: 15.0),
                 ],

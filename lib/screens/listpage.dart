@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:warehouse_app/models/supplier.dart';
 import 'package:warehouse_app/screens/addpage.dart';
+import 'package:warehouse_app/screens/authenticate/login.dart';
 import 'package:warehouse_app/screens/editpage.dart';
 import 'package:flutter/material.dart';
 import 'package:warehouse_app/services/auth.dart';
@@ -29,14 +30,14 @@ class _ListPage extends State<ListPage> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(
-              Icons.app_registration,
+              Icons.logout,
               color: Colors.white,
             ),
             onPressed: () {
               Navigator.pushAndRemoveUntil<dynamic>(
                 context,
                 MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => const AddPage(),
+                  builder: (BuildContext context) => Login(),
                 ),
                 (route) =>
                     false, //if you want to disable back feature set to false
@@ -64,16 +65,20 @@ class _ListPage extends State<ListPage> {
                           children: <Widget>[
                             // ignore: prefer_interpolation_to_compose_strings
                             Text("Email: " + e['email'],
-                                style: const TextStyle(fontSize: 19)),
+                                style:
+                                    const TextStyle(fontSize: 19, height: 1.5)),
                             // ignore: prefer_interpolation_to_compose_strings
                             Text("Contact Number: " + e['phone'],
-                                style: const TextStyle(fontSize: 19)),
+                                style:
+                                    const TextStyle(fontSize: 19, height: 1.5)),
                             // ignore: prefer_interpolation_to_compose_strings
                             Text("Address: " + e['address'],
-                                style: const TextStyle(fontSize: 19)),
+                                style:
+                                    const TextStyle(fontSize: 19, height: 1.5)),
                             // ignore: prefer_interpolation_to_compose_strings
                             Text("Product: " + e['product'],
-                                style: const TextStyle(fontSize: 19)),
+                                style:
+                                    const TextStyle(fontSize: 19, height: 1.5)),
                           ],
                         )),
                       ),
@@ -113,7 +118,7 @@ class _ListPage extends State<ListPage> {
                             primary: const Color.fromARGB(255, 143, 133, 226),
                             textStyle: const TextStyle(fontSize: 20),
                           ),
-                          child: const Text('Delete'),
+                          child: const Text('Remove'),
                           onPressed: () async {
                             var response =
                                 await FirebaseCrud.deleteSupplier(docId: e.id);
