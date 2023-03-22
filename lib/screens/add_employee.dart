@@ -15,6 +15,10 @@ class AddEmployee extends StatefulWidget {
 }
 
 class _AddEmployeeState extends State<AddEmployee> {
+  String? _nameError;
+  String? selectedGender;
+  List<String> _genderOptions = ['Male', 'Female', 'Other'];
+
   final FocusNode focusNode = FocusNode();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -24,177 +28,132 @@ class _AddEmployeeState extends State<AddEmployee> {
   final TextEditingController positionController = TextEditingController();
   final TextEditingController salaryController = TextEditingController();
 
-  bool isNameValid = true;
-  bool isEmailValid = true;
-  bool isPhoneValid = true;
-  bool isGenderValid = true;
-  bool isAddressValid = true;
-  bool isPositionValid = true;
-  bool isSalaryValid = true;
-
-  String? validateName(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your name';
-    }
-    return null;
-  }
-
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter employee email";
-    }
-    return null;
-  }
-
-  String? validatePhone(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter employee phone number";
-    }
-    if (!RegExp(r"^[0-9]{10}$").hasMatch(value)) {
-      return "Please enter a valid phone number";
-    }
-    return null;
-  }
-
-  String? validateGender(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter employee gender";
-    }
-    return null;
-  }
-
-  String? validateAddress(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter employee address";
-    }
-    return null;
-  }
-
-  String? validatePosition(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter employee position";
-    }
-    return null;
-  }
-
-  String? validateSalary(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Please enter employee salary";
-    }
-    if (!RegExp(r"^\d+$").hasMatch(value)) {
-      return "Please enter a valid salary amount";
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Employee"),
         centerTitle: true,
+        backgroundColor: Colors.yellow[700],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            getMyField(
-                focusNode: focusNode,
-                hintText: "Employee Name",
-                controller: nameController,
-                validator: validateName),
+            SizedBox(
+              height: 15,
+            ),
             Text(
-              validateName(nameController.text) ?? '',
-              style: TextStyle(color: Colors.red),
+              "Add New Emplyee",
+              style: TextStyle(
+                  color: Color(0xff453658),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 36.0),
             ),
             getMyField(
-                hintText: "Employee Email",
-                controller: emailController,
-                validator: validateEmail),
-            Text(
-              validateName(emailController.text) ?? '',
-              style: TextStyle(color: Colors.red),
+              focusNode: focusNode,
+              hintText: "Employee Name",
+              controller: nameController,
+              errorText: _nameError,
             ),
             getMyField(
-                hintText: "Employee Mobile",
-                textInputType: TextInputType.number,
-                controller: phoneController,
-                validator: validatePhone),
-            Text(
-              validateName(phoneController.text) ?? '',
-              style: TextStyle(color: Colors.red),
+              hintText: "Email",
+              controller: emailController,
             ),
             getMyField(
-                hintText: "Employee Gender",
-                controller: genderController,
-                validator: validateGender),
-            Text(
-              validateName(genderController.text) ?? '',
-              style: TextStyle(color: Colors.red),
+              hintText: "Mobile",
+              textInputType: TextInputType.number,
+              controller: phoneController,
+            ),
+            getGender(
+              hintText: 'Gender',
+              items: ['Male', 'Female', 'Other'],
+              controller: genderController,
+              onChanged: (value) {
+                setState(() {
+                  selectedGender = value;
+                });
+              },
+              initialValue: selectedGender,
             ),
             getMyField(
-                hintText: "Employee Address",
-                controller: addressController,
-                validator: validateAddress),
-            Text(
-              validateName(addressController.text) ?? '',
-              style: TextStyle(color: Colors.red),
+              hintText: "Address",
+              controller: addressController,
             ),
             getMyField(
-                hintText: "Employee Position",
-                controller: positionController,
-                validator: validatePosition),
-            Text(
-              validateName(positionController.text) ?? '',
-              style: TextStyle(color: Colors.red),
+              hintText: "Position",
+              controller: positionController,
             ),
             getMyField(
-                hintText: "Employee Salary",
-                textInputType: TextInputType.number,
-                controller: salaryController,
-                validator: validateSalary),
-            Text(
-              validateName(salaryController.text) ?? '',
-              style: TextStyle(color: Colors.red),
+              hintText: "Salary",
+              textInputType: TextInputType.number,
+              controller: salaryController,
+            ),
+            SizedBox(
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                    onPressed: () {
-                      //
-                      Employee employee = Employee(
-                          name: (nameController.text),
-                          email: (emailController.text),
-                          phone: int.parse(phoneController.text),
-                          gender: (genderController.text),
-                          address: (addressController.text),
-                          position: (positionController.text),
-                          salary: int.parse(salaryController.text));
-                      AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.success,
-                          animType: AnimType.topSlide,
-                          showCloseIcon: true,
-                          title: "Success!!!",
-                          desc: "Employee added to the database!",
-                          btnOkOnPress: () {
-                            addEmployeeAndNavigateToHome(employee, context);
-                          }).show();
-                    },
-                    child: const Text("Add")),
+                  onPressed: () {
+                    //
+                    Employee employee = Employee(
+                        name: (nameController.text),
+                        email: (emailController.text),
+                        phone: int.parse(phoneController.text),
+                        gender: (genderController.text),
+                        address: (addressController.text),
+                        position: (positionController.text),
+                        salary: int.parse(salaryController.text));
+                    AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.success,
+                        animType: AnimType.topSlide,
+                        showCloseIcon: true,
+                        title: "Success!!!",
+                        desc: "Employee added to the database!",
+                        btnOkOnPress: () {
+                          addEmployeeAndNavigateToHome(employee, context);
+                        }).show();
+                  },
+                  child: const Text(
+                    "Add",
+                    style:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 10, // set the elevation to 10
+                    backgroundColor: Colors.yellow[700],
+                  ),
+                ),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueGrey),
-                    onPressed: () {
-                      nameController.text = "";
-                      emailController.text = "";
-                      phoneController.text = "";
-                      genderController.text = "";
-                      addressController.text = "";
-                      positionController.text = "";
-                      salaryController.text = "";
-                    },
-                    child: const Text("Cancel"))
+                  onPressed: () {
+                    nameController.text = "";
+                    emailController.text = "";
+                    phoneController.text = "";
+                    genderController.text = "";
+                    addressController.text = "";
+                    positionController.text = "";
+                    salaryController.text = "";
+                  },
+                  child: const Text(
+                    "Cancel",
+                    style:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 10, // set the elevation to 10
+                    backgroundColor: Color(0xff453658),
+                  ),
+                )
               ],
             )
           ],
@@ -222,9 +181,47 @@ class _AddEmployeeState extends State<AddEmployee> {
           labelText: hintText,
           border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
-          errorText: errorText,
+          errorText: errorText, // update errorText property
         ),
-        validator: validator,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '$hintText is required';
+          }
+          if (validator != null) {
+            // update errorText property with the error message returned by validator
+            return validator(value);
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  Widget getGender({
+    required String hintText,
+    required List<String> items,
+    required TextEditingController controller,
+    required ValueChanged<String?> onChanged,
+    String? initialValue,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: DropdownButtonFormField<String>(
+        items: items
+            .map((item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(item),
+                ))
+            .toList(),
+        value: initialValue,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          hintText: "Select $hintText",
+          labelText: hintText,
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+          ),
+        ),
       ),
     );
   }

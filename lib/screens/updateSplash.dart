@@ -5,21 +5,21 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:lottie/lottie.dart';
 import 'package:warehouse_app/screens/employee_list.dart';
 
-class DeleteSplash extends StatefulWidget {
-  const DeleteSplash({super.key});
+class UpdateSplash extends StatefulWidget {
+  const UpdateSplash({super.key});
 
   @override
-  State<DeleteSplash> createState() => _DeleteSplashState();
+  State<UpdateSplash> createState() => _UpdateSplashState();
 }
 
-class _DeleteSplashState extends State<DeleteSplash> {
+class _UpdateSplashState extends State<UpdateSplash> {
   void initState() {
     super.initState();
     startTimer();
   }
 
   startTimer() {
-    var duration = const Duration(seconds: 5);
+    var duration = const Duration(seconds: 10);
     return Timer(duration, route);
   }
 
@@ -31,7 +31,7 @@ class _DeleteSplashState extends State<DeleteSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[200],
+      backgroundColor: Colors.green[200],
       body: content(),
     );
   }
@@ -42,12 +42,12 @@ class _DeleteSplashState extends State<DeleteSplash> {
         Center(
           child: Container(
             child: Lottie.network(
-                "https://assets1.lottiefiles.com/packages/lf20_khh1znj5.json"),
+                "https://assets5.lottiefiles.com/private_files/lf30_rzhdjuoe.json"),
           ),
         ),
         // const Center(
         //   child: Text(
-        //     "Employee Deleted!",
+        //     "Employee Updated!",
         //     style: TextStyle(
         //       fontWeight: FontWeight.bold,
         //       fontSize: 24,

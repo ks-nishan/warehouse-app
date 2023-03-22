@@ -96,56 +96,71 @@ class EmployeeList extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           )
-        : ListView.builder(
-            itemCount: employees.length,
-            itemBuilder: (context, index) => Card(
-              color: employees[index].salary < 35000
-                  ? Colors.red.shade200
-                  : employees[index].salary < 65000
-                      ? Colors.blue.shade200
-                      : Colors.green.shade200,
-              child: ListTile(
-                title: Text(employees[index].name),
-                subtitle: Text("Mobile No : ${employees[index].phone}"),
-                leading: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.grey,
-                    // child: Text('${employees[index].email}'),
-                    child: Image.asset("assets/icons/manager.png")),
-                trailing: SizedBox(
-                  width: 60,
-                  child: Row(
+        : Container(
+            child: ListView.builder(
+              itemCount: employees.length,
+              itemBuilder: (context, index) => Card(
+                color: employees[index].salary < 35000
+                    ? Colors.red.shade200
+                    : employees[index].salary < 65000
+                        ? Colors.blue.shade200
+                        : Colors.green.shade200,
+                child: ListTile(
+                  title: Text(employees[index].name),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.black.withOpacity(0.75),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UpdateEmployee(
-                                      employee: employees[index])));
-                        },
-                      ),
-                      InkWell(
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.red.withOpacity(0.75),
-                        ),
-                        onTap: () {
-                          //
-                          _referance.doc(employees[index].id).delete();
-                          //re load the page
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DeleteSplash()));
-                          //popup message
-                        },
-                      ),
+                      Text("Phone: ${employees[index].phone}"),
+                      Text("Email: ${employees[index].email}"),
+                      Text("Gender: ${employees[index].gender}"),
+                      Text("Address: ${employees[index].address}"),
+                      Text("Position: ${employees[index].position}"),
+                      Text("Salary: ${employees[index].salary}"),
                     ],
+                  ),
+                  leading: CircleAvatar(
+                      radius: 45,
+                      backgroundColor: Colors.grey,
+                      // child: Text('${employees[index].email}'),
+                      child: Image.asset("assets/icons/manager.png")),
+                  trailing: SizedBox(
+                    width: 60,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: InkWell(
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.yellow.withOpacity(1),
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UpdateEmployee(
+                                          employee: employees[index])));
+                            },
+                          ),
+                        ),
+                        InkWell(
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.red.withOpacity(0.75),
+                          ),
+                          onTap: () {
+                            //
+                            _referance.doc(employees[index].id).delete();
+                            //re load the page
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DeleteSplash()));
+                            //popup message
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

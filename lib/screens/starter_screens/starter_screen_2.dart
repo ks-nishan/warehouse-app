@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:lottie/lottie.dart";
+import 'package:google_fonts/google_fonts.dart';
 
 class StarterPage2 extends StatefulWidget {
   const StarterPage2({super.key});
@@ -28,11 +29,22 @@ class _StarterPage2State extends State<StarterPage2> {
               height: 50,
             ),
             const Text(
-              "Delivery",
+              "Lets Start!!!",
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 32),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Text(
+                "Let's get started and revolutionize the way you manage your warehouse!",
+                style: GoogleFonts.openSans(
+                    textStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600)),
+              ),
             ),
           ],
         ));

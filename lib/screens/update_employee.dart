@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:warehouse_app/models/employee.dart';
 import 'package:warehouse_app/screens/employee_list.dart';
+import 'package:warehouse_app/screens/updateSplash.dart';
 
 class UpdateEmployee extends StatelessWidget {
   final Employee employee;
@@ -41,33 +42,50 @@ class UpdateEmployee extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Update Employee"),
         centerTitle: true,
+        backgroundColor: Colors.yellow[700],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              "Edit Empl0yee",
+              style: TextStyle(
+                  color: Color(0xff453658),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 36.0),
+            ),
             getMyField(
                 focusNode: focusNode,
                 hintText: "Employee Name",
                 controller: nameController),
-            getMyField(hintText: "Employee Email", controller: emailController),
+            getMyField(hintText: "Email", controller: emailController),
             getMyField(
-                hintText: "Employee Mobile",
+                hintText: "Mobile",
                 textInputType: TextInputType.number,
                 controller: phoneController),
+            getMyField(hintText: "Gender", controller: genderController),
+            getMyField(hintText: "Address", controller: addressController),
+            getMyField(hintText: "Position", controller: positionController),
             getMyField(
-                hintText: "Employee Gender", controller: genderController),
-            getMyField(
-                hintText: "Employee Address", controller: addressController),
-            getMyField(
-                hintText: "Employee Position", controller: positionController),
-            getMyField(
-                hintText: "Employee Salary",
+                hintText: "Basic Salary",
                 textInputType: TextInputType.number,
                 controller: salaryController),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      elevation: 10, // set the elevation to 10
+                      backgroundColor: Colors.yellow[700],
+                    ),
                     onPressed: () {
                       //
                       Employee updatedEmployee = Employee(
@@ -90,23 +108,38 @@ class UpdateEmployee extends StatelessWidget {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EmployeeList()));
+                                builder: (context) => UpdateSplash()));
                       });
                     },
-                    child: const Text("Update")),
+                    child: const Text(
+                      "Update",
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.w400),
+                    )),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueGrey),
-                    onPressed: () {
-                      nameController.text = "";
-                      emailController.text = "";
-                      phoneController.text = "";
-                      genderController.text = "";
-                      addressController.text = "";
-                      positionController.text = "";
-                      salaryController.text = "";
-                    },
-                    child: const Text("Cancel"))
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 10, // set the elevation to 10
+                    backgroundColor: Color(0xff453658),
+                  ),
+                  onPressed: () {
+                    nameController.text = "";
+                    emailController.text = "";
+                    phoneController.text = "";
+                    genderController.text = "";
+                    addressController.text = "";
+                    positionController.text = "";
+                    salaryController.text = "";
+                  },
+                  child: const Text(
+                    "Cancel",
+                    style:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400),
+                  ),
+                )
               ],
             )
           ],
