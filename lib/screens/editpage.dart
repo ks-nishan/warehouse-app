@@ -3,6 +3,7 @@ import 'package:warehouse_app/screens/listpage.dart';
 import 'package:flutter/material.dart';
 
 import '../services/firebase_crud.dart';
+import 'authenticate/login.dart';
 
 class EditPage extends StatefulWidget {
   final Supplier? supplier;
@@ -176,6 +177,24 @@ class _EditPage extends State<EditPage> {
       appBar: AppBar(
         title: const Text('Update Supplier'),
         backgroundColor: Theme.of(context).primaryColor,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil<dynamic>(
+                context,
+                MaterialPageRoute<dynamic>(
+                  builder: (BuildContext context) => Login(),
+                ),
+                (route) =>
+                    false, //if you want to disable back feature set to false
+              );
+            },
+          )
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
