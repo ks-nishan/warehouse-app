@@ -6,14 +6,14 @@ import 'package:warehouse_app/screens/add_product.dart';
 import 'package:warehouse_app/screens/product_list.dart';
 import 'package:warehouse_app/screens/qrScanner.dart';
 
-class DashBoard extends StatefulWidget {
-  const DashBoard({super.key});
+class InventroyDashBoard extends StatefulWidget {
+  const InventroyDashBoard({super.key});
 
   @override
-  State<DashBoard> createState() => _DashBoardState();
+  State<InventroyDashBoard> createState() => _DashBoardState();
 }
 
-class _DashBoardState extends State<DashBoard> {
+class _DashBoardState extends State<InventroyDashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
