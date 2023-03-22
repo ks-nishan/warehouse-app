@@ -24,24 +24,24 @@ class _ListPage extends State<ListPage> {
       appBar: AppBar(
         title: const Text("List of Products"),
         backgroundColor: Theme.of(context).primaryColor,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.app_registration,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pushAndRemoveUntil<dynamic>(
-                context,
-                MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => Add_product(),
-                ),
-                (route) =>
-                    false, 
-              );
-            },
-          )
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: Icon(
+        //       Icons.file_copy_outlined,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () {
+        //       Navigator.pushAndRemoveUntil<dynamic>(
+        //         context,
+        //         MaterialPageRoute<dynamic>(
+        //           builder: (BuildContext context) => Add_product(),
+        //         ),
+        //         (route) =>
+        //             false, 
+        //       );
+        //     },
+        //   )
+        // ],
       ),
       body: StreamBuilder(
         stream: collectionReference,
@@ -69,7 +69,7 @@ class _ListPage extends State<ListPage> {
                         ),
                           IconButton(
             icon: Icon(
-              Icons.app_registration,
+              Icons.file_copy_outlined,
               color:const Color.fromARGB(255, 143, 133, 226),
             ),
             onPressed: () {
@@ -130,10 +130,14 @@ class _ListPage extends State<ListPage> {
                               MaterialPageRoute<dynamic>(
                                 builder: (BuildContext context) => EditPage(
                                   product: Product(
-                                      productId: e.id,
+                                    id: e.id,
+                                    productId: e["productId"],
                                       productName: e["productName"],
                                       description: e["description"],
-                                     type: e["type"]),
+                                     type: e["type"],
+                                     weight: e["weight"],
+                                     uPrice: e["uPrice"],
+                                     stock: e["stock"]),
                                 ),
                               ),
                               (route) =>

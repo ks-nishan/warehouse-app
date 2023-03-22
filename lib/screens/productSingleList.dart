@@ -120,7 +120,8 @@ class _AllProduct extends State<AllProduct> {
             (route) => false, 
           );
         },
-        child: const Text('View List of Products'));
+        child: const Text('Back')
+        );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

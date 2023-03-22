@@ -1,5 +1,4 @@
 import '../screens/product_list.dart';
-import '../screens/Edit_Product.dart';
 import 'package:flutter/material.dart';
 import '../models/product.dart';
 import '../service/Inventory_Service.dart';
@@ -22,7 +21,6 @@ class _EditPage extends State<EditPage> {
   final _weight = TextEditingController();
   final _description = TextEditingController();
   final _type = TextEditingController();
-
   final _docid = TextEditingController();
 
    
@@ -30,7 +28,7 @@ class _EditPage extends State<EditPage> {
 
 @override
   void initState() {
-
+    _docid.value=TextEditingValue(text:widget.product!.id.toString());
     _productId.value = TextEditingValue(text: widget.product!.productId.toString());
    _description.value = TextEditingValue(text: widget.product!.description.toString());
     _type.value = TextEditingValue(text: widget.product!.type.toString());
@@ -44,9 +42,17 @@ class _EditPage extends State<EditPage> {
   @override
   Widget build(BuildContext context) {
 
-
+// final DocIDField = TextField(
+//         controller: _docid,
+//         readOnly: true,
+//         autofocus: false,
+//         decoration: InputDecoration(
+//             contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+//             hintText: "Product Id",
+//             border:
+//                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
    
-    final DocIDField = TextField(
+    final ProductIDField = TextField(
         controller: _productId,
         readOnly: true,
         autofocus: false,
@@ -71,7 +77,7 @@ class _EditPage extends State<EditPage> {
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
 
     final descriptionField = TextFormField(
-        controller: _description,  readOnly: true,
+        controller: _description, 
         autofocus: false,
         validator: (value) {
           if (value == null || value.trim().isEmpty) {
@@ -165,11 +171,11 @@ class _EditPage extends State<EditPage> {
                productId:_productId.text,
                description: _description.text,
                 type: _type.text,
-                docId: _docid.text,
                 uPrice: _uPrice.text,
                 weight: _weight.text,
                 productName: _productName.text,
-                stock: _stock.text);
+                stock: _stock.text,
+                docId:_docid.text);
             if (response.code != 200) {
               showDialog(
                   context: context,
@@ -214,7 +220,9 @@ class _EditPage extends State<EditPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  DocIDField,
+                  // DocIDField,
+                  // const SizedBox(height: 25.0),
+                  ProductIDField,
                   const SizedBox(height: 25.0),
                   nameField,
                   const SizedBox(height: 25.0),
