@@ -1,6 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
+import 'package:warehouse_app/screens/dashboard.dart';
 
 class AppLogin extends StatelessWidget {
   const AppLogin({super.key});
@@ -110,7 +111,13 @@ class AppLogin extends StatelessWidget {
                             height: 40,
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Dashboard()),
+                              );
+                            },
                             child: Text("Login"),
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.symmetric(

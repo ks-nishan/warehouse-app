@@ -23,6 +23,70 @@ class _AddEmployeeState extends State<AddEmployee> {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController positionController = TextEditingController();
   final TextEditingController salaryController = TextEditingController();
+
+  bool isNameValid = true;
+  bool isEmailValid = true;
+  bool isPhoneValid = true;
+  bool isGenderValid = true;
+  bool isAddressValid = true;
+  bool isPositionValid = true;
+  bool isSalaryValid = true;
+
+  String? validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your name';
+    }
+    return null;
+  }
+
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter employee email";
+    }
+    return null;
+  }
+
+  String? validatePhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter employee phone number";
+    }
+    if (!RegExp(r"^[0-9]{10}$").hasMatch(value)) {
+      return "Please enter a valid phone number";
+    }
+    return null;
+  }
+
+  String? validateGender(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter employee gender";
+    }
+    return null;
+  }
+
+  String? validateAddress(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter employee address";
+    }
+    return null;
+  }
+
+  String? validatePosition(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter employee position";
+    }
+    return null;
+  }
+
+  String? validateSalary(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please enter employee salary";
+    }
+    if (!RegExp(r"^\d+$").hasMatch(value)) {
+      return "Please enter a valid salary amount";
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,22 +100,62 @@ class _AddEmployeeState extends State<AddEmployee> {
             getMyField(
                 focusNode: focusNode,
                 hintText: "Employee Name",
-                controller: nameController),
-            getMyField(hintText: "Employee Email", controller: emailController),
+                controller: nameController,
+                validator: validateName),
+            Text(
+              validateName(nameController.text) ?? '',
+              style: TextStyle(color: Colors.red),
+            ),
+            getMyField(
+                hintText: "Employee Email",
+                controller: emailController,
+                validator: validateEmail),
+            Text(
+              validateName(emailController.text) ?? '',
+              style: TextStyle(color: Colors.red),
+            ),
             getMyField(
                 hintText: "Employee Mobile",
                 textInputType: TextInputType.number,
-                controller: phoneController),
+                controller: phoneController,
+                validator: validatePhone),
+            Text(
+              validateName(phoneController.text) ?? '',
+              style: TextStyle(color: Colors.red),
+            ),
             getMyField(
-                hintText: "Employee Gender", controller: genderController),
+                hintText: "Employee Gender",
+                controller: genderController,
+                validator: validateGender),
+            Text(
+              validateName(genderController.text) ?? '',
+              style: TextStyle(color: Colors.red),
+            ),
             getMyField(
-                hintText: "Employee Address", controller: addressController),
+                hintText: "Employee Address",
+                controller: addressController,
+                validator: validateAddress),
+            Text(
+              validateName(addressController.text) ?? '',
+              style: TextStyle(color: Colors.red),
+            ),
             getMyField(
-                hintText: "Employee Position", controller: positionController),
+                hintText: "Employee Position",
+                controller: positionController,
+                validator: validatePosition),
+            Text(
+              validateName(positionController.text) ?? '',
+              style: TextStyle(color: Colors.red),
+            ),
             getMyField(
                 hintText: "Employee Salary",
                 textInputType: TextInputType.number,
-                controller: salaryController),
+                controller: salaryController,
+                validator: validateSalary),
+            Text(
+              validateName(salaryController.text) ?? '',
+              style: TextStyle(color: Colors.red),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -99,22 +203,28 @@ class _AddEmployeeState extends State<AddEmployee> {
     );
   }
 
-  Widget getMyField(
-      {required String hintText,
-      TextInputType textInputType = TextInputType.name,
-      required TextEditingController controller,
-      FocusNode? focusNode}) {
+  Widget getMyField({
+    required String hintText,
+    TextInputType textInputType = TextInputType.name,
+    required TextEditingController controller,
+    FocusNode? focusNode,
+    String? Function(String?)? validator,
+    String? errorText,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: TextField(
+      child: TextFormField(
         focusNode: focusNode,
         controller: controller,
         keyboardType: textInputType,
         decoration: InputDecoration(
-            hintText: "Enter $hintText",
-            labelText: hintText,
-            border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5)))),
+          hintText: "Enter $hintText",
+          labelText: hintText,
+          border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5))),
+          errorText: errorText,
+        ),
+        validator: validator,
       ),
     );
   }
