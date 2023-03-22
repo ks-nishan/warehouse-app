@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import "package:smooth_page_indicator/smooth_page_indicator.dart";
+import "package:warehouse_app/screens/app_login.dart";
+import "package:warehouse_app/screens/dashboard.dart";
 import "package:warehouse_app/screens/employee_list.dart";
 import "package:warehouse_app/screens/starter_screens/starter_screen_1.dart";
 import "package:warehouse_app/screens/starter_screens/starter_screen_2.dart";
@@ -55,7 +57,7 @@ class _AppStarterState extends State<AppStarter> {
                         onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return EmployeeList();
+                            return AppLogin();
                           }));
                         },
                         child: Text("Done"))
