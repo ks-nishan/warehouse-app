@@ -2,6 +2,7 @@
 //
 //     final employee = employeeFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 Employee employeeFromJson(String str) => Employee.fromJson(json.decode(str));
@@ -14,6 +15,8 @@ class Employee {
     required this.name,
     required this.email,
     required this.phone,
+    required this.gender,
+    required this.address,
     required this.position,
     required this.salary,
   });
@@ -22,6 +25,8 @@ class Employee {
   final String name;
   final String email;
   final int phone;
+  final String gender;
+  final String address;
   final String position;
   final int salary;
 
@@ -30,6 +35,8 @@ class Employee {
         name: json["name"],
         email: json["email"],
         phone: json["phone"],
+        gender: json["gender"],
+        address: json["address"],
         position: json["position"],
         salary: json["salary"],
       );
@@ -39,6 +46,8 @@ class Employee {
         "name": name,
         "email": email,
         "phone": phone,
+        "gender": gender,
+        "address": address,
         "position": position,
         "salary": salary,
       };

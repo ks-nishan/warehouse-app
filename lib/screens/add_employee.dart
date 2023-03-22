@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:warehouse_app/models/employee.dart';
@@ -61,9 +62,20 @@ class _AddEmployeeState extends State<AddEmployee> {
                           name: (nameController.text),
                           email: (emailController.text),
                           phone: int.parse(phoneController.text),
+                          gender: (genderController.text),
+                          address: (addressController.text),
                           position: (positionController.text),
                           salary: int.parse(salaryController.text));
-                      addEmployeeAndNavigateToHome(employee, context);
+                      AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.success,
+                          animType: AnimType.topSlide,
+                          showCloseIcon: true,
+                          title: "Success!!!",
+                          desc: "Employee added to the database!",
+                          btnOkOnPress: () {
+                            addEmployeeAndNavigateToHome(employee, context);
+                          }).show();
                     },
                     child: const Text("Add")),
                 ElevatedButton(
@@ -108,7 +120,7 @@ class _AddEmployeeState extends State<AddEmployee> {
   }
 
   void addEmployeeAndNavigateToHome(Employee employee, BuildContext context) {
-    final studentRef = FirebaseFirestore.instance.collection('employees').doc();
+    final studentRef = FirebaseFirestore.instance.collection('demo').doc();
     employee.id = studentRef.id;
     final data = employee.toJson();
     studentRef.set(data).whenComplete(() {
