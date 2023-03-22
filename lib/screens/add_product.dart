@@ -133,7 +133,7 @@ class _Add_product extends State<Add_product> {
     final SaveButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Theme.of(context).primaryColor,
+      color: Colors.yellow[700],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -169,8 +169,9 @@ class _Add_product extends State<Add_product> {
         },
         child: Text(
           "Save",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          style: TextStyle(color: Colors.black),
           textAlign: TextAlign.center,
+          
         ),
       ),
     );
@@ -179,7 +180,8 @@ class _Add_product extends State<Add_product> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Inventory Management'),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
+          foregroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Column(

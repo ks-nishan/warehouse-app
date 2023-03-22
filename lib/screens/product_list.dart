@@ -23,7 +23,8 @@ class _ListPage extends State<ListPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text("List of Products"),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
+          foregroundColor: Colors.black,
         // actions: <Widget>[
         //   IconButton(
         //     icon: Icon(
@@ -70,7 +71,7 @@ class _ListPage extends State<ListPage> {
                           IconButton(
             icon: Icon(
               Icons.file_copy_outlined,
-              color:const Color.fromARGB(255, 143, 133, 226),
+              color: Colors.black,
             ),
             onPressed: () {
                             Navigator.pushAndRemoveUntil<dynamic>(
@@ -120,7 +121,7 @@ class _ListPage extends State<ListPage> {
                         TextButton(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.all(5.0),
-                            primary: const Color.fromARGB(255, 143, 133, 226),
+                            primary: Colors.black,
                             textStyle: const TextStyle(fontSize: 20),
                           ),
                           child: const Text('Edit'),
@@ -148,7 +149,7 @@ class _ListPage extends State<ListPage> {
                         TextButton(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.all(5.0),
-                            primary: const Color.fromARGB(255, 143, 133, 226),
+                            primary: Colors.black,
                             textStyle: const TextStyle(fontSize: 20),
                           ),
                           child: const Text('Delete'),

@@ -110,7 +110,7 @@ class _AllProduct extends State<AllProduct> {
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
              
 
-    final viewListbutton = TextButton(
+    final viewbutton = TextButton(
         onPressed: () {
           Navigator.pushAndRemoveUntil<dynamic>(
             context,
@@ -126,7 +126,8 @@ class _AllProduct extends State<AllProduct> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Product View '),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
+         foregroundColor: Colors.black,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -158,7 +159,7 @@ class _AllProduct extends State<AllProduct> {
                      const SizedBox(height: 25.0),
                  descriptionField,
                    const SizedBox(height: 35.0),
-                  viewListbutton,
+                  viewbutton,
                   const SizedBox(height: 45.0),
                   
                  

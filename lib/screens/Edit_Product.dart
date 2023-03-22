@@ -146,22 +146,22 @@ class _EditPage extends State<EditPage> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
              
-    final viewListbutton = TextButton(
-        onPressed: () {
-          Navigator.pushAndRemoveUntil<dynamic>(
-            context,
-            MaterialPageRoute<dynamic>(
-              builder: (BuildContext context) => ListPage(),
-            ),
-            (route) => false, 
-          );
-        },
-        child: const Text('View List of Products'));
+    // final viewListbutton = TextButton(
+    //     onPressed: () {
+    //       Navigator.pushAndRemoveUntil<dynamic>(
+    //         context,
+    //         MaterialPageRoute<dynamic>(
+    //           builder: (BuildContext context) => ListPage(),
+    //         ),
+    //         (route) => false, 
+    //       );
+    //     },
+    //     child: const Text('View List of Products'));
 
     final SaveButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Theme.of(context).primaryColor,
+      color: Colors.yellow[700],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -197,7 +197,7 @@ class _EditPage extends State<EditPage> {
         },
         child: Text(
           "Update",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          style: TextStyle(color: Colors.black), 
           textAlign: TextAlign.center,
         ),
       ),
@@ -207,7 +207,8 @@ class _EditPage extends State<EditPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Edit Products '),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
+          foregroundColor: Colors.black,
       ),
       body:SingleChildScrollView( child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -236,8 +237,8 @@ class _EditPage extends State<EditPage> {
                 const SizedBox(height: 25.0),
                 descriptionField,
                 const SizedBox(height: 35.0),
-                  viewListbutton,
-                  const SizedBox(height: 45.0),
+                  // viewListbutton,
+                  // const SizedBox(height: 45.0),
                   SaveButon,
                   const SizedBox(height: 15.0),
                 ],

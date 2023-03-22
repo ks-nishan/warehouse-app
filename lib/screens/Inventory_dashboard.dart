@@ -17,7 +17,9 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:Text("Inventory DashBoard")),
+      appBar: AppBar(title:Text("Inventory DashBoard"),
+      backgroundColor: Colors.yellow[700],
+      foregroundColor: Colors.black,),
       body: Container(
         child:Padding(padding: const EdgeInsets.all(10.0),child: GridView(children: [
         InkWell(
@@ -30,8 +32,8 @@ class _DashBoardState extends State<DashBoard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Icon(Icons.add,size:50,color:Colors. white,),
-            Text("Add Product",style: TextStyle(color: Colors.white,fontSize: 30),)
+            Icon(Icons.add,size:50,color:Colors.black,),
+            Text("Add Product",style: TextStyle(color: Colors.black,fontSize: 30),)
           ]),),
         ),
         InkWell(
@@ -44,8 +46,8 @@ class _DashBoardState extends State<DashBoard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Icon(Icons.file_copy,size:50,color:Colors. white,),
-            Text("View Product",style: TextStyle(color: Colors.white,fontSize: 30),)
+            Icon(Icons.file_copy,size:50,color:Colors. black,),
+            Text("View Product",style: TextStyle(color: Colors.black,fontSize: 30),)
           ]),),
         ),
      
@@ -59,8 +61,8 @@ class _DashBoardState extends State<DashBoard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Icon(Icons.scanner,size:50,color:Colors. white,),
-            Text("QR Scanner",style: TextStyle(color: Colors.white,fontSize: 30),)
+            Icon(Icons.scanner,size:50,color:Colors. black,),
+            Text("QR Scanner",style: TextStyle(color: Colors.black,fontSize: 30),)
           ]),),
         ),
       ],
