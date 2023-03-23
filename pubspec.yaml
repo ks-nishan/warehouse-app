@@ -43,6 +43,8 @@ dependencies:
   awesome_dialog: ^3.0.2
   lottie: ^2.3.0
   smooth_page_indicator: ^1.0.1
+  animated_text_kit: ^4.2.2
+  getwidget: ^2.0.4
 
 dev_dependencies:
   flutter_test:

@@ -28,7 +28,7 @@ class FirebaseCrud {
 
     var result = await documentReferencer.set(data).whenComplete(() {
       response.code = 200;
-      response.message = "Sucessfully added to the database";
+      response.message = "Sucessfully Added";
     }).catchError((e) {
       response.code = 500;
       response.message = e;
@@ -64,7 +64,7 @@ class FirebaseCrud {
 
     await documentReferencer.update(data).whenComplete(() {
       response.code = 200;
-      response.message = "Sucessfully updated";
+      response.message = "Sucessfully Updated";
     }).catchError((e) {
       response.code = 500;
       response.message = e;

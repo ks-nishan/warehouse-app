@@ -1,8 +1,13 @@
+import 'package:warehouse_app/screens/authenticate/register.dart';
+import 'package:warehouse_app/screens/dashboard.dart';
 import 'package:warehouse_app/screens/listpage.dart';
 import 'package:flutter/material.dart';
+import 'package:warehouse_app/screens/suphome.dart';
 import 'package:warehouse_app/services/auth.dart';
+import '../models/dropdownoption.dart';
 import '../services/firebase_crud.dart';
-import 'authenticate/login.dart';
+import 'package:warehouse_app/screens/authenticate/login.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({super.key});
@@ -14,8 +19,23 @@ class AddPage extends StatefulWidget {
   }
 }
 
-class _AddPage extends State<AddPage> {
+class _AddPage extends State<AddPage> with SingleTickerProviderStateMixin {
+  // late TabController controller;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   controller = TabController(length: 2, vsync: this);
+  // }
+
+  // @override
+  // void dispose() {
+  //   controller.dispose();
+  //   super.dispose();
+  // }
+
   final AuthService _auth = new AuthService();
+  String? selectedIem = 'pro1';
   final name = TextEditingController();
   final email = TextEditingController();
   final phone = TextEditingController();
@@ -26,23 +46,23 @@ class _AddPage extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final SignOut = Material(
-    //   elevation: 5.0,
-    //   borderRadius: BorderRadius.circular(30.0),
-    //   color: Theme.of(context).primaryColor,
-    //   child: MaterialButton(
-    //     minWidth: MediaQuery.of(context).size.width,
-    //     padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-    //     onPressed: () async {
-    //       await _auth.signOut();
-    //     },
-    //     child: Text(
-    //       "Log out",
-    //       style: TextStyle(color: Theme.of(context).primaryColorLight),
-    //       textAlign: TextAlign.center,
-    //     ),
-    //   ),
-    // );
+    final SignOut = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Theme.of(context).primaryColor,
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () async {
+          await _auth.signOut();
+        },
+        child: Text(
+          "Log out",
+          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
 
     final nameField = TextFormField(
         controller: name,
@@ -105,19 +125,47 @@ class _AddPage extends State<AddPage> {
             hintText: "Address",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
-    final productField = TextFormField(
-        controller: product,
-        autofocus: false,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field is required';
-          }
-        },
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Product",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+    String? selectedProduct;
+    final productField = DropdownButtonFormField<String>(
+      value: selectedProduct,
+      onChanged: (String? newValue) {
+        setState(() {
+          selectedProduct = newValue;
+        });
+      },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please select a product';
+        }
+      },
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        labelText: 'Product',
+        hintText: 'Please select a product',
+      ),
+      items: <String>['Apple', 'Banana', 'Orange']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+
+    // final productField = TextFormField(
+    //     controller: product,
+    //     autofocus: false,
+    //     validator: (value) {
+    //       if (value == null || value.trim().isEmpty) {
+    //         return 'This field is required';
+    //       }
+    //     },
+    //     decoration: InputDecoration(
+    //         contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    //         hintText: "Product",
+    //         border:
+    //             OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
     final viewListbutton = TextButton(
         onPressed: () {
           Navigator.pushAndRemoveUntil<dynamic>(
@@ -128,12 +176,17 @@ class _AddPage extends State<AddPage> {
             (route) => false, //To disable back feature set to false
           );
         },
-        child: const Text('View List of Suppliers'));
+        child: const Text(
+          "View List Of Suppliers",
+          style:
+              TextStyle(color: Color.fromARGB(255, 172, 172, 6), fontSize: 22),
+          textAlign: TextAlign.center,
+        ));
 
     final SaveButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Theme.of(context).primaryColor,
+      color: Color.fromARGB(255, 59, 59, 91),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -155,6 +208,9 @@ class _AddPage extends State<AddPage> {
                     );
                   });
             } else {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const suphome()));
+
               // ignore: use_build_context_synchronously
               showDialog(
                   context: context,
@@ -166,9 +222,10 @@ class _AddPage extends State<AddPage> {
             }
           }
         },
-        child: Text(
+        child: const Text(
           "Save",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          style: TextStyle(
+              color: Color.fromARGB(255, 255, 249, 249), fontSize: 22),
           textAlign: TextAlign.center,
         ),
       ),
@@ -176,31 +233,52 @@ class _AddPage extends State<AddPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('Add Supplier'),
-        backgroundColor: Theme.of(context).primaryColor,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.logout,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.pushAndRemoveUntil<dynamic>(
-                context,
-                MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => Login(),
-                ),
-                (route) =>
-                    false, //if you want to disable back feature set to false
-              );
-            },
-          )
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Add Supplier'),
+      //   backgroundColor: Colors.yellow[700],
+      //   actions: <Widget>[
+      //     IconButton(
+      //       icon: const Icon(
+      //         Icons.logout,
+      //         color: Colors.white,
+      //       ),
+      //       onPressed: () async {
+      //         await _auth.signOut();
+      //       },
+      //     )
+      //   ],
+      //   // bottom: TabBar(controller: controller, tabs: const [
+      //   //   Tab(icon: Icon(Icons.home)),
+      //   //   Tab(icon: Icon(Icons.list)),
+      //   // ]),
+      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Expanded(
+          //   child: TabBarView(controller: controller, children: const [
+          //     AddPage(),
+          //     ListPage(),
+          //   ]),
+          // ),
+          SizedBox(
+            width: 250.0,
+            child: DefaultTextStyle(
+              style: const TextStyle(
+                  fontSize: 40.0,
+                  color: Color.fromARGB(255, 59, 59, 91),
+                  fontWeight: FontWeight.bold),
+              child:
+                  AnimatedTextKit(isRepeatingAnimation: true, animatedTexts: [
+                TyperAnimatedText('Add Supplier',
+                    speed: Duration(milliseconds: 100)),
+                // TyperAnimatedText('to the', speed: Duration(milliseconds: 100)),
+                // TyperAnimatedText('Warehouse management ',
+                //     speed: Duration(milliseconds: 100)),
+                // TyperAnimatedText('system', speed: Duration(milliseconds: 100)),
+              ]),
+            ),
+          ),
           Form(
             key: _formKey,
             child: Padding(
@@ -209,8 +287,6 @@ class _AddPage extends State<AddPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  // SignOut,
-                  // const SizedBox(height: 15.0),
                   nameField,
                   const SizedBox(height: 35.0),
                   emailField,
@@ -221,8 +297,8 @@ class _AddPage extends State<AddPage> {
                   const SizedBox(height: 35.0),
                   productField,
                   const SizedBox(height: 35.0),
-                  viewListbutton,
-                  const SizedBox(height: 35.0),
+                  // viewListbutton,
+                  // const SizedBox(height: 45.0),
                   SaveButon,
                   const SizedBox(height: 15.0),
                 ],

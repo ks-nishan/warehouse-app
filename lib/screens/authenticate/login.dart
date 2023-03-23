@@ -22,11 +22,6 @@ class _Login extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    Column(
-      children: [
-        Image.asset('assets/images/login.png'), // <-- SEE HERE
-      ],
-    );
     final emailField = TextFormField(
         controller: _email,
         autofocus: false,
@@ -78,12 +73,17 @@ class _Login extends State<Login> {
         onPressed: () {
           widget.toggleView!();
         },
-        child: const Text('New? Register here'));
+        child: const Text(
+          'New? Register here',
+          style:
+              TextStyle(color: Color.fromARGB(255, 172, 172, 6), fontSize: 15),
+          textAlign: TextAlign.center,
+        ));
 
     final loginAnonymousButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Theme.of(context).primaryColor,
+      color: Color.fromARGB(255, 14, 14, 13),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -101,18 +101,13 @@ class _Login extends State<Login> {
                 });
           }
         },
-        child: Text(
-          "Log in Anonymously",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
-          textAlign: TextAlign.center,
-        ),
       ),
     );
 
     final loginEmailPasswordButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Theme.of(context).primaryColor,
+      color: Colors.yellow[700],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -132,9 +127,10 @@ class _Login extends State<Login> {
             }
           }
         },
-        child: Text(
-          "Log in",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+        child: const Text(
+          "Log In",
+          style: TextStyle(
+              color: Color.fromARGB(255, 255, 249, 249), fontSize: 22),
           textAlign: TextAlign.center,
         ),
       ),
@@ -144,29 +140,43 @@ class _Login extends State<Login> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Login'),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Form(
             key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  emailField,
-                  const SizedBox(height: 25.0),
-                  passwordField,
-                  txtbutton,
-                  const SizedBox(height: 35.0),
-                  loginEmailPasswordButon,
-                  const SizedBox(height: 15.0),
-                ],
+            child: Column(children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 60.0),
+                child: Center(
+                  child: Container(
+                      width: 400,
+                      height: 300,
+                      /*decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(50.0)),*/
+                      child: Image.asset('assets/images/logi.png')),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    emailField,
+                    const SizedBox(height: 25.0),
+                    passwordField,
+                    txtbutton,
+                    const SizedBox(height: 35.0),
+                    loginEmailPasswordButon,
+                    const SizedBox(height: 15.0),
+                  ],
+                ),
+              ),
+            ]),
           ),
         ],
       ),
