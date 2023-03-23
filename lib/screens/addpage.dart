@@ -22,8 +22,8 @@ class AddPage extends StatefulWidget {
 class _AddPage extends State<AddPage> with SingleTickerProviderStateMixin {
   final AuthService _auth = new AuthService();
 
-  final prodctList = <String>['Apple', 'Banana', 'Orange'];
-  String selectedProduct = "Apple";
+  final prodctList = <String>['Paint', 'Wood', 'Glass', 'Furniture'];
+  String selectedProduct = "Paint";
   final name = TextEditingController();
   final email = TextEditingController();
   final phone = TextEditingController();

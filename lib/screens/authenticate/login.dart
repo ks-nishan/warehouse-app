@@ -137,49 +137,52 @@ class _Login extends State<Login> {
     );
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: Colors.yellow[700],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Form(
-            key: _formKey,
-            child: Column(children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: Center(
-                  child: Container(
-                      width: 400,
-                      height: 300,
-                      /*decoration: BoxDecoration(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text('Login'),
+          backgroundColor: Colors.yellow[700],
+        ),
+        body: Container(
+          padding: EdgeInsets.only(top: 30, right: 16, left: 16),
+          child: SingleChildScrollView(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Form(
+                key: _formKey,
+                child: Column(children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 60.0),
+                    child: Center(
+                      child: Container(
+                          width: 400,
+                          height: 300,
+                          /*decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(50.0)),*/
-                      child: Image.asset('assets/images/logi.png')),
-                ),
+                          child: Image.asset('assets/images/logi.png')),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        emailField,
+                        const SizedBox(height: 25.0),
+                        passwordField,
+                        txtbutton,
+                        const SizedBox(height: 35.0),
+                        loginEmailPasswordButon,
+                        const SizedBox(height: 15.0),
+                      ],
+                    ),
+                  ),
+                ]),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    emailField,
-                    const SizedBox(height: 25.0),
-                    passwordField,
-                    txtbutton,
-                    const SizedBox(height: 35.0),
-                    loginEmailPasswordButon,
-                    const SizedBox(height: 15.0),
-                  ],
-                ),
-              ),
-            ]),
-          ),
-        ],
-      ),
-    );
+            ],
+          )),
+        ));
   }
 }
