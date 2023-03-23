@@ -22,33 +22,46 @@ class _Add_product extends State<Add_product> {
 
   @override
   Widget build(BuildContext context) {
-    final idField = TextFormField(
-        controller: _productId,
-        autofocus: false,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field is required';
-          }
-        },
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Product Id",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+final idField = TextFormField(
+  controller: _productId,
+  autofocus: false,
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'This field is required';
+    }
+   
+    final pattern = RegExp(r'^\d+$');
+    if (!pattern.hasMatch(value)) {
+      return 'Product ID must consist of only digits';
+    }
+    return null;
+  },
+  decoration: InputDecoration(
+    contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    hintText: "Product Id",
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+  ),
+);
+final nameField = TextFormField(
+  controller: _productName,
+  autofocus: false,
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'This field is required';
+    }
+    final pattern = RegExp(r'^[a-zA-Z ]+$');
+    if (!pattern.hasMatch(value)) {
+      return 'Product name must consist of only letters and spaces';
+    }
+    return null;
+  },
+  decoration: InputDecoration(
+    contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    hintText: "Product Name",
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+  ),
+);
 
-    final nameField = TextFormField(
-        controller: _productName,
-        autofocus: false,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field is required';
-          }
-        },
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Product Name",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
     final priceField = TextFormField(
         controller: _uPrice,
         autofocus: false,
@@ -56,6 +69,10 @@ class _Add_product extends State<Add_product> {
           if (value == null || value.trim().isEmpty) {
             return 'This field is required';
           }
+          final number = double.tryParse(value);
+    if (number == null || number <= 0) {
+      return 'Please enter a valid number greater than zero';
+    }
         },
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -64,32 +81,45 @@ class _Add_product extends State<Add_product> {
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
 
     final typeField = TextFormField(
-        controller: _type,
-        autofocus: false,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field is required';
-          }
-        },
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Type",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+  controller: _type,
+  autofocus: false,
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'This field is required';
+    }
 
-    final weightField = TextFormField(
-        controller: _weight,
-        autofocus: false,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field is required';
-          }
-        },
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Weight",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+    final pattern = RegExp(r'^[a-zA-Z ]+$');
+    if (!pattern.hasMatch(value)) {
+      return 'Product type must consist of only letters and spaces';
+    }
+    return null;
+  },
+  decoration: InputDecoration(
+    contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    hintText: "Type",
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+  ),
+);
+   final weightField = TextFormField(
+  controller: _weight,
+  autofocus: false,
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'This field is required';
+    }
+
+    final pattern = RegExp(r'^\d+(\.\d+)?$');
+    if (!pattern.hasMatch(value)) {
+      return 'Weight must be a valid number';
+    }
+    return null;
+  },
+  decoration: InputDecoration(
+    contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    hintText: "Weight",
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+  ),
+);
 
     final descriptionField = TextFormField(
         controller: _description,
@@ -105,19 +135,25 @@ class _Add_product extends State<Add_product> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
 
-    final stockField = TextFormField(
-        controller: _stock,
-        autofocus: false,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field is required';
-          }
-        },
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "In Stock ",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+   final stockField = TextFormField(
+  controller: _stock,
+  autofocus: false,
+  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'This field is required';
+    }
+    final pattern = RegExp(r'^\d+$');
+    if (!pattern.hasMatch(value)) {
+      return 'Stock must be a valid number';
+    }
+    return null;
+  },
+  decoration: InputDecoration(
+    contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    hintText: "In Stock",
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+  ),
+);
     // final viewListbutton = TextButton(
     //     onPressed: () {
     //       Navigator.pushAndRemoveUntil<dynamic>(
