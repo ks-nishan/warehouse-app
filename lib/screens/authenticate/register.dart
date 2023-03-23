@@ -1,3 +1,5 @@
+import 'package:getwidget/components/animation/gf_animation.dart';
+import 'package:getwidget/types/gf_animation_type.dart';
 import 'package:warehouse_app/models/loginuser.dart';
 import 'package:warehouse_app/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,19 @@ class Register extends StatefulWidget {
   }
 }
 
-class _Register extends State<Register> {
+class _Register extends State<Register> with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
+    animation = new CurvedAnimation(parent: controller, curve: Curves.linear);
+    controller.repeat();
+  }
+
   final AuthService _auth = AuthService();
 
   bool _obscureText = true;
@@ -71,12 +85,17 @@ class _Register extends State<Register> {
         onPressed: () {
           widget.toggleView!();
         },
-        child: const Text('Go to login'));
+        child: const Text(
+          'Go to login',
+          style:
+              TextStyle(color: Color.fromARGB(255, 172, 172, 6), fontSize: 15),
+          textAlign: TextAlign.center,
+        ));
 
     final registerButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Theme.of(context).primaryColor,
+      color: Colors.yellow[700],
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -97,9 +116,10 @@ class _Register extends State<Register> {
             }
           }
         },
-        child: Text(
+        child: const Text(
           "Register",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          style: TextStyle(
+              color: Color.fromARGB(255, 255, 249, 249), fontSize: 22),
           textAlign: TextAlign.center,
         ),
       ),
@@ -109,32 +129,61 @@ class _Register extends State<Register> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Register'),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          GestureDetector(
+            onTap: () {
+              controller.repeat();
+            },
+            child: GFAnimation(
+              scaleAnimation: animation,
+              controller: controller,
+              type: GFAnimationType.scaleTransition,
+              child: Image.asset(
+                'assets/images/regi.png',
+                width: 300,
+                height: 200,
+              ),
+            ),
+          ),
           Form(
             autovalidateMode: AutovalidateMode.always,
             key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const SizedBox(height: 45.0),
-                  emailField,
-                  const SizedBox(height: 25.0),
-                  passwordField,
-                  const SizedBox(height: 25.0),
-                  txtbutton,
-                  const SizedBox(height: 35.0),
-                  registerButton,
-                  const SizedBox(height: 15.0),
-                ],
+            child: Column(children: <Widget>[
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 60.0),
+              //   child: Center(
+              //     child: Container(
+              //         width: 300,
+              //         height: 200,
+              //         /*decoration: BoxDecoration(
+              //           color: Colors.red,
+              //           borderRadius: BorderRadius.circular(50.0)),*/
+              //         child: Image.asset('assets/images/regi.png')),
+              //   ),
+              // ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(height: 45.0),
+                    emailField,
+                    const SizedBox(height: 25.0),
+                    passwordField,
+                    const SizedBox(height: 25.0),
+                    txtbutton,
+                    const SizedBox(height: 15.0),
+                    registerButton,
+                    const SizedBox(height: 15.0),
+                  ],
+                ),
               ),
-            ),
+            ]),
           ),
         ],
       ),

@@ -1,7 +1,8 @@
 import 'package:warehouse_app/models/supplier.dart';
 import 'package:warehouse_app/screens/listpage.dart';
 import 'package:flutter/material.dart';
-
+import 'package:warehouse_app/screens/suphome.dart';
+import 'package:warehouse_app/services/auth.dart';
 import '../services/firebase_crud.dart';
 import 'authenticate/login.dart';
 
@@ -17,6 +18,7 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPage extends State<EditPage> {
+  final AuthService _auth = new AuthService();
   final name = TextEditingController();
   final email = TextEditingController();
   final phone = TextEditingController();
@@ -39,6 +41,24 @@ class _EditPage extends State<EditPage> {
 
   @override
   Widget build(BuildContext context) {
+    final SignOut = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Theme.of(context).primaryColor,
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () async {
+          await _auth.signOut();
+        },
+        child: Text(
+          "Log out",
+          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+
     final nameField = TextFormField(
         controller: name,
         autofocus: false,
@@ -123,18 +143,24 @@ class _EditPage extends State<EditPage> {
             (route) => false, //if you want to disable back feature set to false
           );
         },
-        child: const Text('View List of Suppliers'));
+        child: const Text(
+          "View List Of Suppliers",
+          style:
+              TextStyle(color: Color.fromARGB(255, 172, 172, 6), fontSize: 22),
+          textAlign: TextAlign.center,
+        ));
 
     // ignore: non_constant_identifier_names
     final SaveButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Theme.of(context).primaryColor,
+      color: Color.fromARGB(255, 59, 59, 91),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
+            Widget result;
             var response = await FirebaseCrud.updateSupplier(
               name: name.text,
               email: email.text,
@@ -143,7 +169,11 @@ class _EditPage extends State<EditPage> {
               product: product.text,
               docId: docid.text,
             );
+
             if (response.code != 200) {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => EditPage()));
+
               // ignore: use_build_context_synchronously
               showDialog(
                   context: context,
@@ -153,6 +183,9 @@ class _EditPage extends State<EditPage> {
                     );
                   });
             } else {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => suphome()));
+
               // ignore: use_build_context_synchronously
               showDialog(
                   context: context,
@@ -164,9 +197,10 @@ class _EditPage extends State<EditPage> {
             }
           }
         },
-        child: Text(
+        child: const Text(
           "Update",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          style: TextStyle(
+              color: Color.fromARGB(255, 255, 249, 249), fontSize: 22),
           textAlign: TextAlign.center,
         ),
       ),
@@ -176,22 +210,15 @@ class _EditPage extends State<EditPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Update Supplier'),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
         actions: <Widget>[
           IconButton(
             icon: const Icon(
               Icons.logout,
               color: Colors.white,
             ),
-            onPressed: () {
-              Navigator.pushAndRemoveUntil<dynamic>(
-                context,
-                MaterialPageRoute<dynamic>(
-                  builder: (BuildContext context) => Login(),
-                ),
-                (route) =>
-                    false, //if you want to disable back feature set to false
-              );
+            onPressed: () async {
+              await _auth.signOut();
             },
           )
         ],

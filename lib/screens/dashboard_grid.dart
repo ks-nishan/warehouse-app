@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:warehouse_app/screens/add_employee.dart';
+import 'package:warehouse_app/screens/addpage.dart';
 import 'package:warehouse_app/screens/employee_list.dart';
+import 'package:warehouse_app/screens/listpage.dart';
+import 'package:warehouse_app/screens/suphome.dart';
 
 class GridDashboard extends StatelessWidget {
   Items item1 = Items(
@@ -25,7 +28,7 @@ class GridDashboard extends StatelessWidget {
   Items item4 = Items(
     title: "Supplier",
     subtitle: "Supply chain",
-    navigate: EmployeeList(),
+    navigate: const suphome(),
     img: "assets/icons/supplier.png",
   );
   Items item5 = Items(
