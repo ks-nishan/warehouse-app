@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:warehouse_app/models/supplier.dart';
 import 'package:warehouse_app/screens/listpage.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ class EditPage extends StatefulWidget {
 
 class _EditPage extends State<EditPage> {
   final AuthService _auth = new AuthService();
+  final prodctList = <String>['Apple', 'Banana', 'Orange'];
+  String selectedProduct = "Apple";
   final name = TextEditingController();
   final email = TextEditingController();
   final phone = TextEditingController();
@@ -120,19 +123,31 @@ class _EditPage extends State<EditPage> {
             hintText: "Address",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
-    final productField = TextFormField(
-        controller: product,
-        autofocus: false,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field is required';
-          }
-        },
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Product",
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+    final productField = DropdownButtonFormField<String>(
+      value: selectedProduct,
+      onChanged: (String? newValue) {
+        setState(() {
+          selectedProduct = newValue!;
+        });
+      },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please select a product';
+        }
+      },
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        labelText: 'Product',
+        hintText: 'Please select a product',
+      ),
+      items: prodctList.map((String value) {
+        return DropdownMenuItem(
+          child: Text(value),
+          value: value,
+        );
+      }).toList(),
+    );
     final viewListbutton = TextButton(
         onPressed: () {
           Navigator.pushAndRemoveUntil<dynamic>(
@@ -166,7 +181,7 @@ class _EditPage extends State<EditPage> {
               email: email.text,
               phone: phone.text,
               address: address.text,
-              product: product.text,
+              product: selectedProduct,
               docId: docid.text,
             );
 
@@ -207,53 +222,72 @@ class _EditPage extends State<EditPage> {
     );
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('Update Supplier'),
-        backgroundColor: Colors.yellow[700],
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.logout,
-              color: Colors.white,
-            ),
-            onPressed: () async {
-              await _auth.signOut();
-            },
-          )
-        ],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  nameField,
-                  const SizedBox(height: 35.0),
-                  emailField,
-                  const SizedBox(height: 35.0),
-                  phoneField,
-                  const SizedBox(height: 35.0),
-                  addressField,
-                  const SizedBox(height: 35.0),
-                  productField,
-                  const SizedBox(height: 35.0),
-                  viewListbutton,
-                  const SizedBox(height: 45.0),
-                  SaveButon,
-                  const SizedBox(height: 15.0),
-                ],
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text('Update Supplier'),
+          backgroundColor: Colors.yellow[700],
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.white,
               ),
-            ),
-          ),
-        ],
-      ),
-    );
+              onPressed: () async {
+                await _auth.signOut();
+              },
+            )
+          ],
+        ),
+        body: Container(
+          padding: EdgeInsets.only(top: 30, right: 16, left: 16),
+          child: SingleChildScrollView(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 50.0,
+                width: 300.0,
+                child: DefaultTextStyle(
+                  style: const TextStyle(
+                      fontSize: 40.0,
+                      color: Color.fromARGB(255, 59, 59, 91),
+                      fontWeight: FontWeight.bold),
+                  child: AnimatedTextKit(
+                      isRepeatingAnimation: true,
+                      animatedTexts: [
+                        TyperAnimatedText('Update Supplier',
+                            speed: Duration(milliseconds: 100)),
+                      ]),
+                ),
+              ),
+              Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      nameField,
+                      const SizedBox(height: 35.0),
+                      emailField,
+                      const SizedBox(height: 35.0),
+                      phoneField,
+                      const SizedBox(height: 35.0),
+                      addressField,
+                      const SizedBox(height: 35.0),
+                      productField,
+                      const SizedBox(height: 35.0),
+                      // viewListbutton,
+                      // const SizedBox(height: 45.0),
+                      SaveButon,
+                      const SizedBox(height: 15.0),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )),
+        ));
   }
 }
