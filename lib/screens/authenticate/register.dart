@@ -104,7 +104,6 @@ class _Register extends State<Register> with SingleTickerProviderStateMixin {
             dynamic result = await _auth.registerEmailPassword(
                 LoginUser(email: _email.text, password: _password.text));
             if (result.uid == null) {
-              //null means unsuccessfull authentication
               // ignore: use_build_context_synchronously
               showDialog(
                   context: context,
@@ -153,18 +152,6 @@ class _Register extends State<Register> with SingleTickerProviderStateMixin {
             autovalidateMode: AutovalidateMode.always,
             key: _formKey,
             child: Column(children: <Widget>[
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 60.0),
-              //   child: Center(
-              //     child: Container(
-              //         width: 300,
-              //         height: 200,
-              //         /*decoration: BoxDecoration(
-              //           color: Colors.red,
-              //           borderRadius: BorderRadius.circular(50.0)),*/
-              //         child: Image.asset('assets/images/regi.png')),
-              //   ),
-              // ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
