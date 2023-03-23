@@ -19,19 +19,6 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPage extends State<ListPage> with SingleTickerProviderStateMixin {
-  // late TabController controller;
-  // @override
-  // void initState() {
-  //   controller = TabController(length: 3, vsync: this);
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   controller.dispose();
-  //   super.dispose();
-  // }
-
   final AuthService _auth = AuthService();
   final Stream<QuerySnapshot> collectionReference = FirebaseCrud.readSupplier();
   //FirebaseFirestore.instance.collection('Employee').snapshots();
@@ -56,26 +43,6 @@ class _ListPage extends State<ListPage> with SingleTickerProviderStateMixin {
     );
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        // appBar: AppBar(
-        //     // title: const Text("List of Suppliers"),
-        //     // backgroundColor: Colors.yellow[700],
-        //     // actions: <Widget>[
-        //     //   IconButton(
-        //     //     icon: const Icon(
-        //     //       Icons.logout,
-        //     //       color: Colors.white,
-        //     //     ),
-        //     //     onPressed: () async {
-        //     //       await _auth.signOut();
-        //     //     },
-        //     //   )
-        //     // ],
-        //     // bottom: TabBar(controller: controller, tabs: const [
-        //     //   Tab(icon: Icon(Icons.home)),
-        //     //   Tab(icon: Icon(Icons.add_box)),
-        //     //   Tab(icon: Icon(Icons.list)),
-        //     // ]),
-        //     ),
         body: StreamBuilder(
           stream: collectionReference,
           builder:
@@ -95,6 +62,7 @@ class _ListPage extends State<ListPage> with SingleTickerProviderStateMixin {
                     return Card(
                         child: Column(children: [
                       ListTile(
+                        leading: Image.asset("assets/icons/supplier.png"),
                         title: Text(e["name"],
                             style: const TextStyle(fontSize: 24)),
                         subtitle: Container(

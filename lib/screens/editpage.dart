@@ -20,8 +20,8 @@ class EditPage extends StatefulWidget {
 
 class _EditPage extends State<EditPage> {
   final AuthService _auth = new AuthService();
-  final prodctList = <String>['Apple', 'Banana', 'Orange'];
-  String selectedProduct = "Apple";
+  final prodctList = <String>['Paint', 'Wood', 'Glass', 'Furniture'];
+  String selectedProduct = "Paint";
   final name = TextEditingController();
   final email = TextEditingController();
   final phone = TextEditingController();
