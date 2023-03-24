@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:lottie/lottie.dart";
+import 'package:google_fonts/google_fonts.dart';
 
 class StarterPage3 extends StatelessWidget {
   const StarterPage3({super.key});
@@ -14,12 +15,23 @@ class StarterPage3 extends StatelessWidget {
               const SizedBox(
                 height: 100,
               ),
-              const Text(
-                'Page 02',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Text(
+                'Simple UI',
+                style: GoogleFonts.openSans(
+                    textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Text(
+                  "We are excited to introduce you to a user-friendly way to manage your warehouse.",
+                  style: GoogleFonts.openSans(
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600)),
                 ),
               ),
               SizedBox(
