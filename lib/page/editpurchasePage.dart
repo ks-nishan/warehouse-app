@@ -45,6 +45,8 @@ class _EditPage extends State<EditPage> {
 
   @override
   Widget build(BuildContext context) {
+    backgroundColor:
+    Colors.yellow[700];
     final DocIDField = TextField(
         controller: _docid,
         readOnly: true,
@@ -167,18 +169,6 @@ class _EditPage extends State<EditPage> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
 
-    final viewListbutton = TextButton(
-        onPressed: () {
-          Navigator.pushAndRemoveUntil<dynamic>(
-            context,
-            MaterialPageRoute<dynamic>(
-              builder: (BuildContext context) => ListPage(),
-            ),
-            (route) => false,
-          );
-        },
-        child: const Text('View List of purchase'));
-
     final SaveButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -219,9 +209,26 @@ class _EditPage extends State<EditPage> {
         },
         child: Text(
           "Update",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          style: TextStyle(color: Color.fromARGB(255, 32, 27, 13)),
           textAlign: TextAlign.center,
         ),
+      ),
+    );
+
+    final viewListbutton = TextButton(
+      onPressed: () {
+        Navigator.pushAndRemoveUntil<dynamic>(
+          context,
+          MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) => ListPage(),
+          ),
+          (route) => false,
+        );
+      },
+      child: Text(
+        "View List of Purchase",
+        style: TextStyle(color: Color.fromARGB(255, 20, 17, 9)),
+        textAlign: TextAlign.center,
       ),
     );
 
@@ -229,7 +236,7 @@ class _EditPage extends State<EditPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Purchase'),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -243,26 +250,26 @@ class _EditPage extends State<EditPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   DocIDField,
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 18.0),
                   listField,
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 18.0),
                   codeField,
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 18.0),
                   PnameField,
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 18.0),
                   PdateField,
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 18.0),
                   QtyField,
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 18.0),
                   UnitField,
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 18.0),
                   deliveryField,
-                  const SizedBox(height: 25.0),
+                  const SizedBox(height: 18.0),
                   SnameField,
-                  const SizedBox(height: 25.0),
-                  viewListbutton,
-                  const SizedBox(height: 45.0),
+                  const SizedBox(height: 18.0),
                   SaveButon,
+                  const SizedBox(height: 45.0),
+                  viewListbutton,
                   const SizedBox(height: 15.0),
                 ],
               ),
