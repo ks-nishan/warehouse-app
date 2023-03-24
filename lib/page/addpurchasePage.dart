@@ -24,6 +24,8 @@ class _AddPage extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
+    backgroundColor:
+    Colors.yellow[700];
     final listField = TextFormField(
         controller: _PlistID,
         autofocus: false,
@@ -136,18 +138,6 @@ class _AddPage extends State<AddPage> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
 
-    final viewListbutton = TextButton(
-        onPressed: () {
-          Navigator.pushAndRemoveUntil<dynamic>(
-            context,
-            MaterialPageRoute<dynamic>(
-              builder: (BuildContext context) => ListPage(),
-            ),
-            (route) => false, //To disable back feature set to false
-          );
-        },
-        child: const Text('View List of Purchases'));
-
     final SaveButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -187,9 +177,26 @@ class _AddPage extends State<AddPage> {
         },
         child: Text(
           "Save",
-          style: TextStyle(color: Theme.of(context).primaryColorLight),
+          style: TextStyle(color: Color.fromARGB(255, 20, 17, 9)),
           textAlign: TextAlign.center,
         ),
+      ),
+    );
+
+    final viewListbutton = TextButton(
+      onPressed: () {
+        Navigator.pushAndRemoveUntil<dynamic>(
+          context,
+          MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) => ListPage(),
+          ),
+          (route) => false, //To disable back feature set to false
+        );
+      },
+      child: Text(
+        "View List of Purchase",
+        style: TextStyle(color: Color.fromARGB(255, 20, 17, 9)),
+        textAlign: TextAlign.center,
       ),
     );
 
@@ -197,7 +204,7 @@ class _AddPage extends State<AddPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Purchase Management'),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -20,10 +20,11 @@ class _ListPage extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[700],
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text("All Purchase"),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.yellow[700],
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -59,17 +60,17 @@ class _ListPage extends State<ListPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text("code: " + e['code'],
-                                style: const TextStyle(fontSize: 14)),
+                                style: const TextStyle(fontSize: 16)),
                             Text("Pname: " + e['Pname'],
-                                style: const TextStyle(fontSize: 12)),
+                                style: const TextStyle(fontSize: 16)),
                             Text("Pdate: " + e['Pdate'],
-                                style: const TextStyle(fontSize: 14)),
+                                style: const TextStyle(fontSize: 16)),
                             Text("Unit: " + e['unit'],
-                                style: const TextStyle(fontSize: 14)),
+                                style: const TextStyle(fontSize: 16)),
                             Text("Sname: " + e['Sname'],
-                                style: const TextStyle(fontSize: 14)),
+                                style: const TextStyle(fontSize: 16)),
                             Text("Ddate: " + e['Ddate'],
-                                style: const TextStyle(fontSize: 14)),
+                                style: const TextStyle(fontSize: 16)),
                           ],
                         )),
                       ),
@@ -80,7 +81,7 @@ class _ListPage extends State<ListPage> {
                         TextButton(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.all(5.0),
-                            primary: const Color.fromARGB(255, 143, 133, 226),
+                            primary: Colors.yellow[700],
                             textStyle: const TextStyle(fontSize: 20),
                           ),
                           child: const Text('Edit'),
@@ -108,7 +109,7 @@ class _ListPage extends State<ListPage> {
                         TextButton(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.all(5.0),
-                            primary: const Color.fromARGB(255, 143, 133, 226),
+                            primary: Colors.yellow[700],
                             textStyle: const TextStyle(fontSize: 20),
                           ),
                           child: const Text('Delete'),
@@ -130,10 +131,10 @@ class _ListPage extends State<ListPage> {
                         TextButton(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.all(5.0),
-                            primary: const Color.fromARGB(255, 143, 133, 226),
+                            primary: Color.fromARGB(255, 18, 18, 17),
                             textStyle: const TextStyle(fontSize: 20),
                           ),
-                          child: const Text('hello'),
+                          child: const Text('ADD'),
                           onPressed: () {
                             Navigator.push(
                               context,
