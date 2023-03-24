@@ -94,6 +94,9 @@ class _AddPage extends State<AddPage> with SingleTickerProviderStateMixin {
           if (value.trim().length < 10) {
             return 'Enter valid number';
           }
+          if (!RegExp(r'^\d{10}$').hasMatch(value.trim())) {
+            return 'Enter a valid 10-digit number';
+          }
         },
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
